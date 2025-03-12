@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- MathJax for Equations -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            background: url('../assets/images/ml-Background.webp') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Dark Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Layout Containers */
+        header,
+        footer {
+            background: linear-gradient(135deg, #0829df, #04013c);
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background: rgba(19, 50, 185, 0.85);
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #d9dcdf;
+        }
+
+        /* Styling for Key Sections */
+        .case h2,
+        h3 {
+            color: #ffcc00;
+        }
+
+        .case p {
+            color: #ffffff;
+        }
+
+        /* Table Styles */
+        table {
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Styling */
+        .image-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .image-container img {
+            width: 35%;
+            border-radius: 5px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Alignment */
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .image-container {
+            flex: 1;
+        }
+
+        .image-container img {
+            width: 65%;
+            border-radius: 10px;
+        }
+
+        .text-container {
+            flex: 1;
+            width: 55%;
+        }
+
+        /* Failure Cases Section */
+        .failure-cases {
+            width: 90%;
+            max-width: 1600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            text-align: justify;
+        }
+
+        .case {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        /* Decision Tree Node Styles */
+        .node circle {
+            fill: #69b3a2;
+            stroke: #555;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            fill: white;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+
+        * {
+            user-select: text;
+        }
+
+        .process-flow {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            /* background-color: #f9f9f9; */
+        }
+
+        .step {
+            margin: 15px 0;
+            padding: 10px;
+            border-left: 4px solid #fbff00;
+            /* background-color: #eef4ff; */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.5em;
+            color: #ffcc00;
+        }
+
+        .note {
+
+            border-left: 5px solid #f4c430;
+            padding: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<header>
+    <h1>
+        <h2>Agentic AI Based ChatBot for Healthcare Account Plan Analysis</h2>
+    </h1>
+</header>
+
+<body>
+    <div class="failure-cases">
+        <div class="case" style="font-family: 'Courier New', monospace; padding: 10px; border: 1px solid #ddd;">
+            <div class="project-pitch">
+                <div class="failure-cases">
+                    <h2>Introduction</h2>
+                    <p>"One of my most impactful projects was developing an Agentic Bot Framework that streamlined
+                        healthcare account plan data analysis using LlamaIndex. The goal was to create an intelligent
+                        system
+                        comprised of specialized agents to analyze Elevance Health data through structured workflows,
+                        enabling comprehensive healthcare data analysis and natural language query processing."</p>
+                </div>
+            </div>
+            <div class="failure-cases">
+                <h2>Problem Statement</h2>
+                <p>
+                    Navigating healthcare account plans is a complex and time-intensive process. These plans contain
+                    vast amounts of fragmented data—ranging from benefit names to cost shares across different network
+                    tiers—making manual validation and insight extraction both inefficient and error-prone.
+                </p>
+                <p>
+                    During the annual renewal of commercial health benefit plans, Enrollment and Benefit Administration
+                    (EBA) professionals and Sales Agents must specify benefits and their cost shares for each network
+                    tier. This often requires searching across historical benefit data, manually locating relevant
+                    details within extensive documents—a process that slows down renewals and impacts efficiency.
+                </p>
+                <p>
+                    To streamline this, we have developed an <strong>LLM-powered conversational AI assistant</strong>
+                    within <strong>Automated Benefit Integration (ABI)</strong>. This intelligent, agent-driven
+                    framework:
+                </p>
+                <ul>
+                    <li><strong>Enhances efficiency</strong> by simplifying plan information access.</li>
+                    <li><strong>Reduces errors</strong> with real-time data validation.</li>
+                    <li><strong>Expedites renewals</strong> by minimizing manual research.</li>
+                    <li><strong>Improves collaboration</strong> through seamless integration with tools like Jira for
+                        task management.</li>
+                    <li><strong>Elevates the customer experience</strong> by accelerating speed to market and improving
+                        service responsiveness.</li>
+                </ul>
+                <p>
+                    By leveraging AI-driven automation, our solution transforms benefit administration, optimizing
+                    workflows, ensuring data accuracy, and empowering teams with intelligent insights.
+                </p>
+            </div>
+
+            <div class="failure-cases">
+                <h2>Architecture Overview:</h2>
+                <figure>
+                    <img src="../assets/images/visual.png" alt="Histogram example"
+                        style="width: auto; max-width: 600px; height: auto; display: block; margin: 0 auto;">
+                    <figcaption></figcaption>
+                </figure>
+            </div>
+
+            <div class="failure-cases">
+                <div class="key-components">
+                    <h2>Key Components & Their Roles</h2>
+
+                    <h3>1. User Interface (UI)</h3>
+                    <p><strong>Role:</strong> The front-end layer where users (e.g., Client Managers, EBAs) interact
+                        with the system.</p>
+                    <p><strong>Function:</strong> Submits queries (e.g., benefit plan questions) and receives responses
+                        or documents.</p>
+
+                    <h3>2. Agentic Controller</h3>
+                    <p><strong>Role:</strong> Central orchestrator managing user requests and routing them to
+                        appropriate tools.</p>
+                    <p><strong>Function:</strong></p>
+                    <ul>
+                        <li>Maintains Session Context (tracks conversation history and user intent).</li>
+                        <li>Coordinates with Benefit Coverage Tool (for benefit plan configurations), Plan Level Tool
+                            Plan/Group Level Info, and Engage Advisor (support ticketing).</li>
+                    </ul>
+
+                    <h3>3. Benefits Tool</h3>
+                    <p><strong>Role:</strong> Core module for handling benefit-related operations.</p>
+                    <p><strong>Function:</strong></p>
+                    <ul>
+                        <li>Uses RAG (Retrieval-Augmented Generation) to fetch data from databases (e.g., Oracle DB,
+                            Post-Gross Vector DB).</li>
+                        <li>Integrates LLM Call (e.g., GPT-4) to generate human-like responses to user queries.</li>
+                        <li>Mostly replies in a single line (Example: "Air Ambulance is covered in most of the plans").
+                        </li>
+                    </ul>
+
+                    <h3>4. Statistics Tool</h3>
+                    <p><strong>Role:</strong> Core module for statistics-related queries.</p>
+                    <p><strong>Function:</strong></p>
+                    <ul>
+                        <li>Accesses Oracle data through Procedure codes.</li>
+                        <li>Formats the data and sends it to LLM for proper formatting as instructed by the prompt.</li>
+                    </ul>
+
+                    <h3>5. Costshare Tool</h3>
+                    <p><strong>Role:</strong> Core module to share cost shares or plan-level information.</p>
+                    <p><strong>Function:</strong></p>
+                    <ul>
+                        <li>Accesses Oracle data through Procedure codes.</li>
+                        <li>Formats the data and sends it to LLM for proper formatting as instructed by the prompt.</li>
+                        <li>LLM responds with plan names or cost shares as a string. Using an output parser (Pydantic
+                            Output Parsers), we convert it to a list.</li>
+                    </ul>
+
+                    <h3>6. Databases</h3>
+                    <ul>
+                        <li><strong>Oracle DB:</strong> Stores structured benefit data (e.g., plan details, cost
+                            shares).</li>
+                        <li><strong>Post-Gross Vector DB:</strong> Likely a specialized database for post-calculation or
+                            actuarial data.</li>
+                    </ul>
+
+                    <h3>7. Jira Creation</h3>
+                    <p><strong>Role:</strong> Presumed to be an API Gateway (e.g., Client API) for external
+                        integrations.</p>
+                    <p><strong>Function:</strong> Connects to systems like JIRA (for Engage Advisor tickets) or FOBS
+                        (for plan updates).</p>
+                </div>
+
+            </div>
+            <div class="failure-cases">
+                <div class="process-flow">
+                    <h2><i class="fas fa-procedures"></i> Basic Workflow Example</h2>
+
+                    <div class="step">
+                        <i class="fas fa-user icon"></i>
+                        <p><strong> User Query: </strong><em>What’s the cost share for air ambulance?</em></p>
+                    </div>
+
+                    <div class="step" style="margin-left: 40px;">
+                        <i class="fas fa-brain icon"></i>
+                        <p><strong>Agentic Controller: </strong> checks the <em>Session Context</em> to understand
+                            intent.</p>
+                    </div>
+
+                    <div class="step" style="margin-left: 40px;">
+                        <i class="fas fa-database icon"></i>
+                        <p><strong>Query</strong> is routed to the <strong>Benefits Tool</strong>, which:</p>
+                    </div>
+
+                    <div class="step" style="margin-left: 40px;">
+                        <i class="fas fa-magnifying-glass icon"></i>
+                        <p><strong>RAG</strong> to retrieve relevant data from <strong>Vector DB</strong>.</p>
+                    </div>
+
+                    <div class="step" style="margin-left: 40px;">
+                        <i class="fas fa-robot icon"></i>
+                        <p><strong>Generates a response</strong> via <strong>LLM Call</strong>, ensuring accuracy and
+                            natural language formatting.</p>
+                    </div>
+
+                    <div class="step">
+                        <i class="fas fa-user icon"></i>
+                        <p><strong> User : </strong><em>Not satisfied with the response</em></p>
+                    </div>
+
+                    <div class="step" style="margin-left: 40px;">
+                        <i class="fas fa-ticket-alt icon"></i>
+                        <p><strong>User reports: <strong>Jira Creation</strong> compiles data into a formatted document.
+                        </p>
+                    </div>
+
+                    <div class="step" style="margin-left: 40px;">
+                        <i class="fas fa-ticket-alt icon"></i>
+                        <p><strong>Complex issues: </strong><strong>Engage Advisor</strong> creates a ticket via JIRA
+                            API to involve SMEs.</p>
+                    </div>
+
+                </div>
+
+                <ol>
+            </div>
+
+            <div class="container">
+                <h1><i class="fas fa-procedures" style="color: #ffcc00"></i> Key Information</h1>
+
+                <div class="note" style="color: #ffcc00">
+                    <i class="fas fa-exclamation-circle"></i>
+                    All interactions with the LLM are query-specific, meaning they do not retain previous context or
+                    chat history. To maintain continuity, we explicitly track context within Agentic AI.
+                    <br>
+                    Once the query is completed, we store the session data in Redis for efficient retrieval and state
+                    management.
+                </div>
+            </div>
+
+            <div class="failure-cases">
+                <h1><i class="fas fa-robot"></i> AI Agentic Framework</h1>
+
+                <div class="note">
+                    <i class="fas fa-lightbulb"></i> How do we achieve this? We create a session where all user queries
+                    and metadata are stored.
+                </div>
+
+                <h2><i class="fas fa-database"></i> Session Data Structure</h2>
+                <p>Below is an example session:</p>
+                <pre>
+            {
+                sessionId:     <em>16-digit UUID assigned to an individual user for a session,</em>
+                groupId:       <em>metadata – identifier- group,</em>
+                benefitName:   <em>Benefit extracted from user query,</em>
+                benefitOption: <em>Cost share extracted from user query,</em>
+                planName:      <em>Plan names extracted from user query</em>
+            }
+                </pre>
+
+                <section>
+                    <i class="fas fa-user icon"></i>
+                    <p><strong style="color: #ffcc00">User Logs In: </strong>
+                </section>
+                <section>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p><strong style="color: #ffcc00">Response:</strong> <em>Greet Message</em></p>
+                </section>
+                <section style="margin-left: 40px;"><i class="fas fa-brain icon"></i><strong>Backend:
+                    </strong><em>session id is allocated to user</em>
+                </section>
+                <section>
+                    <i class="fas fa-user icon"></i>
+                    <p><strong style="color: #ffcc00">User : </strong><em>What’s the cost share for air ambulance?</em>
+                    </p>
+                </section>
+                <section style="margin-left: 40px;">
+                    <i class="fas fa-search icon"></i>
+                    <p><strong></strong> The system performs <strong>basic entity extraction</strong> for
+                        groupId, groupName, benefitOption, and planName.</p>
+                </section>
+
+                <section style="margin-left: 40px;">
+                    <i class="fas fa-brain icon"></i>
+                    <p><strong></strong> OpenAI agent is invoked with session data.</p>
+                </section>
+
+                <section style="margin-left: 40px;">
+                    <i class="fas fa-route icon"></i>
+                    <p><strong></strong> The AI Agent determines which tool should handle the query based on
+                        system prompts.</p>
+                </section>
+
+                <section>
+                    <i class="fas fa-check-circle icon"></i>
+                    <p><strong></strong> The tool validates metadata. If a <strong>group ID is missing</strong>,
+                        it prompts the user for input.</p>
+                </section>
+
+                <section>
+                    <i class="fas fa-table icon"></i>
+                    <p><strong></strong> The tool retrieves benefit names using <strong>BM25 encoding</strong>
+                        for similarity search.</p>
+                </section>
+
+                <section>
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <p><strong></strong> If multiple benefit names match, the user is prompted to select the
+                        correct one.</p>
+                </section>
+
+                <h2><i class="fas fa-database"></i> Data Fetching Mechanism</h2>
+                <ul>
+                    <li>If metadata is complete, data is fetched from <strong>PostgreSQL vector DB</strong> using
+                        similarity search.</li>
+                    <li>To avoid slow responses with large datasets, an alternative <strong>Oracle tabular
+                            database</strong> is used.</li>
+                    <li>The data is preprocessed and formatted before being sent to LLM for insights.</li>
+                </ul>
+
+                <h2><i class="fas fa-layer-group"></i> Handling Plan-Level Queries</h2>
+                <ul>
+                    <li>If a user asks for <strong>plan-level information</strong>, Oracle DB is used to retrieve group
+                        IDs and plans.</li>
+                    <li>The response is formatted and passed through an output parser.</li>
+                </ul>
+
+                <h2><i class="fas fa-thumbs-down"></i> Handling Dissatisfaction</h2>
+                <p>If the user is dissatisfied with the response:</p>
+                <ul>
+                    <li>A "thumbs down" option allows them to raise a dissatisfaction report.</li>
+                    <li>If approved, the <strong>Engage Advisor</strong> creates a JIRA ticket for SMEs.</li>
+                </ul>
+
+                <h2><i class="fas fa-chart-line"></i> AI-Driven Transformation</h2>
+                <p>By leveraging AI Agents, we streamline query handling, enhance user experience, and improve
+                    decision-making with real-time insights.</p>
+
+            </div>
+            <div class="failure-cases">
+                <div class="container">
+                    <h1><i class="fas fa-robot"></i> Leveraging AI Agents</h1>
+
+                    <section class="section">
+                        <i class="fas fa-lightbulb icon"></i>
+                        <p>AI Agents are transforming our solutions by enhancing efficiency, improving response
+                            time, and providing intelligent query handling.</p>
+                    </section>
+
+                    <h2><i class="fas fa-plus-circle"></i> Pros of AI Framework</h2>
+                    <ul>
+                        <li><i class="fas fa-comment-dots"></i> <strong>Understands human language very
+                                well.</strong></li>
+                        <li><i class="fas fa-rocket"></i> <strong>Fast Responses:</strong> Sometimes answers user
+                            queries from <strong>CACHE</strong> without querying tools, improving speed.</li>
+                        <li><i class="fas fa-smile"></i> <strong>Handles Out-of-Scope Queries:</strong> Even if a
+                            question is outside its predefined scope, the bot provides intelligent responses,
+                            enhancing user experience.</li>
+                    </ul>
+
+                    <h2><i class="fas fa-minus-circle"></i> Cons of AI Framework</h2>
+                    <ul>
+                        <li><i class="fas fa-random"></i> <strong>Inconsistent Responses:</strong> LLMs may not
+                            always provide the same answer for identical queries.</li>
+                    </ul>
+
+                    <h2><i class="fas fa-exclamation-triangle"></i> Example of Inconsistent Responses</h2>
+                    <div class="example">
+                        <strong>User Query:</strong> Is air ambulance covered? <br>
+                        <strong>Response 1:</strong> Air Ambulance is <span style="color: red;">Not Covered</span>
+                        in few of the plans. <br>
+                        <strong>Response 2:</strong> Air Ambulance is <span style="color: green;">Covered</span> in
+                        most of the plans.
+                    </div>
+
+                    <section class="section">
+                        <i class="fas fa-info-circle icon"></i>
+                        <p><strong>Issue:</strong> While both responses appear similar, they have different meanings
+                            since "Covered" and "Not Covered" are distinct administrative types of coverage.</p>
+                    </section>
+                </div>
+            </div>
+            <div class="failure-cases">
+
+                <h3>Final Thought:</h3>
+                <p>"This project showcased my ability to blend AI, data engineering, and workflow automation to solve
+                    real-world problems. It wasn’t just about building a bot; it was about creating a system that
+                    empowered users to interact with complex healthcare data effortlessly while ensuring operational
+                    efficiency."</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

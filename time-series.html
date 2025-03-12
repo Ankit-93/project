@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- MathJax for Equations -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            background: url('../assets/images/ml-Background.webp') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Dark Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Layout Containers */
+        header,
+        footer {
+            background: linear-gradient(135deg, #0829df, #04013c);
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background: rgba(19, 50, 185, 0.85);
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #d9dcdf;
+        }
+
+        /* Styling for Key Sections */
+        .case h3 {
+            color: #ffcc00;
+        }
+
+        .case p {
+            color: #ffffff;
+        }
+
+        /* Table Styles */
+        table {
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Styling */
+        .image-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .image-container img {
+            width: 35%;
+            border-radius: 5px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Alignment */
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .image-container {
+            flex: 1;
+        }
+
+        .image-container img {
+            width: 65%;
+            border-radius: 10px;
+        }
+
+        .text-container {
+            flex: 1;
+            width: 55%;
+        }
+
+        /* Failure Cases Section */
+        .failure-cases {
+            width: 90%;
+            max-width: 1600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            text-align: justify;
+        }
+
+        .case {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        /* Decision Tree Node Styles */
+        .node circle {
+            fill: #69b3a2;
+            stroke: #555;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            fill: white;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+
+        * {
+            user-select: text;
+        }
+    </style>
+</head>
+
+<header>
+    <h1>Electricity Demand Forecasting</h1>
+</header>
+
+<body>
+
+    <div class="failure-cases">
+        <div class="case" style="font-family: 'Courier New', monospace; padding: 10px; border: 1px solid #ddd;">
+
+            <div>
+                <h2></h2>
+
+                <h3>Introduction</h3>
+                <p>Accurate electricity demand forecasts are crucial for electric utilities and regional
+                    transmission organizations. Long-term forecasts reduce investment risk, medium-term
+                    forecasts aid in planning fuel purchases and scheduling plant maintenance, and short-term
+                    forecasts are essential for matching electricity generation with demand to ensure grid
+                    reliability.</p>
+                <p>This project focused on medium-term forecasting, specifically making one-week-out forecasts
+                    at an hourly resolution for London. Historical electricity demand and weather data from
+                    2002-2020 were used. A combination of time series analysis and regression models were
+                    employed to make forecasting predictions, which were compared against the observed hourly
+                    electricity demand for a series of one-week intervals.</p>
+
+                <h3>Data Collection</h3>
+                <ul>
+                    <li><strong>Electricity Demand Data:</strong> Historical electricity demand data was
+                        provided by the County of London Electric Supply Company (C.L.E.S.Co) Limited. The data
+                        for each year was segmented by weather zones. Initial processing included converting
+                        timestamps to datetime indexes, removing duplicate entries by averaging values with the
+                        same timestamp, and filling missing values by backfilling from the next available entry.
+                        This resulted in a dataframe of time and load.</li>
+                    <li><strong>Weather Data:</strong> Weather features like temperature and humidity impact
+                        electricity consumption. Weather data was sourced from Weather Underground. A parser was
+                        built to extract relevant data from a single API endpoint, and the data scraping script
+                        was extended to compile hourly weather data from 2002-2020 into a single dataframe. The
+                        data included time, temperature, humidity, wind speed, and weather conditions. Missing
+                        wind speed data was converted to the mean or lowest observed wind speed, weather
+                        conditions were converted to integers, and humidity values were converted to
+                        percentages. Hourly frequency of the data was enforced by removing duplicate entries.
+                    </li>
+                </ul>
+
+                <h3>Feature Engineering</h3>
+                <p>The categorical feature "condition" was converted into a one-hot encoding. The original
+                    dataset from Weather Underground used 17 different weather conditions, which were grouped
+                    into 6 broad categories: clear, cloud, rain, tstorm, fog, and snow. The electricity demand
+                    and weather data were merged into a single dataframe, with missing values filled in by
+                    back-filling for one-hot encoding features and interpolation for continuous features.</p>
+                <p>Additional temporal features were created, such as a boolean feature "weekday" to indicate
+                    whether it was a weekday, and sine/cosine transformations for the hour of the day to capture
+                    time-of-day effects. Continuous features were normalized to the range [0, 1] to facilitate
+                    model training.</p>
+
+                <h3>Designing Models</h3>
+                <p>Time series forecasting becomes more challenging as the forecasting period decreases.
+                    Therefore, the original electricity demand time series was decomposed into two components:
+                    monthly average electricity demand and hourly residuals. The monthly averages were modeled
+                    using traditional time series methods, while the hourly residuals (the amount above or below
+                    the monthly average at each hour) were modeled using various regression models. The
+                    predictions from both models were combined to get a full prediction for hourly electricity
+                    demand.</p>
+
+                <h3>Summary: Electricity Demand Forecasting Models</h3>
+                <h4>Monthly Averages (SARIMA)</h4>
+                <ul>
+                    <li><strong>Model:</strong> SARIMA (seasonal ARIMA) captures yearly seasonality (m=12) and
+                        trends in monthly demand.</li>
+                    <li><strong>Data Split:</strong> Sequential training (2002–2014), validation (2015–2016),
+                        test (2017–2020) sets.</li>
+                    <li><strong>Tuning:</strong> Grid search for hyperparameters (values 0/1) using MAE (to
+                        avoid issues with normalized MAPE).</li>
+                    <li><strong>Insights:</strong> Clear upward trend (population growth) and seasonality
+                        (summer peaks, smaller winter spikes). Winter peaks correlate with holidays/cold
+                        weather.</li>
+                </ul>
+
+                <h4>Hourly Residuals (Regression)</h4>
+                <ul>
+                    <li><strong>Approach:</strong> Residuals (actual – monthly average) modeled via regression
+                        for 1-week-ahead hourly forecasts.</li>
+                    <li><strong>Baseline:</strong> Persistence model (last week’s value as forecast).</li>
+                    <li><strong>Models Tested:</strong>
+                        <ol>
+                            <li>Linear Regression: Outperformed baseline but lacked nuance (overweighted
+                                time-of-day features).</li>
+                            <li>Gradient Boosting (GBR): Best performance (61% MAPE improvement), captured daily
+                                peaks.</li>
+                            <li>MLP: Better than linear regression but lagged GBR due to hyperparameter tuning
+                                challenges.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Validation:</strong> Weekly forecasts concatenated to avoid error snowballing.
+                    </li>
+                </ul>
+
+                <h4>Key Takeaways</h4>
+                <ul>
+                    <li>SARIMA + GBR combo delivered optimal accuracy.</li>
+                    <li>Future Improvements: Deeper hyperparameter tuning (especially MLP), adding contextual
+                        features (e.g., events).</li>
+                </ul>
+
+                <h3>Evaluating Final Models</h3>
+                <p>The predictions from both the monthly and hourly models were combined and evaluated against
+                    the test data. The MAPE was computed for each model. All three models performed better than
+                    the baseline, with GBR performing best, followed by MLP, and linear regression significantly
+                    worse. Visualizations of one-week-out forecasts for each model over a span of two weeks on
+                    the test set showed GBR with the best performance, followed by MLP and linear regression.
+                </p>
+
+                <h3>Summary & Future Work</h3>
+                <p>This project addressed the issue of forecasting electricity demand at one-week intervals with
+                    an hourly resolution. The original time series data was decomposed into monthly averages and
+                    hourly residuals. The monthly averages were modeled using a SARIMA model, and the hourly
+                    residuals were modeled using three different regression models. Gradient boosting regression
+                    showed the best performance on the test set, with a 61% improvement over the baseline
+                    persistence model.</p>
+                <p>The accuracy of the gradient boosting regression model is quite good and could be used for
+                    one-week-out forecasting as a first-order estimate. For higher accuracy, further study is
+                    suggested, including a more thorough investigation of hyperparameters and adding contextual
+                    features to improve model accuracy.</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

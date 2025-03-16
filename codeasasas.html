@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- MathJax for Equations -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            background: url('./assets/images/ml-Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Dark Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Layout Containers */
+        header,
+        footer {
+            background: linear-gradient(135deg, #0829df, #04013c);
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background: rgba(19, 50, 185, 0.85);
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #d9dcdf;
+        }
+
+        /* Styling for Key Sections */
+        .case h3 {
+            color: #ffcc00;
+        }
+
+        .case p {
+            color: #ffffff;
+        }
+
+        /* Table Styles */
+        table {
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Styling */
+        .image-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .image-container img {
+            width: 35%;
+            border-radius: 5px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Alignment */
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .image-container {
+            flex: 1;
+        }
+
+        .image-container img {
+            width: 65%;
+            border-radius: 10px;
+        }
+
+        .text-container {
+            flex: 1;
+            width: 55%;
+        }
+
+        /* Failure Cases Section */
+        .failure-cases {
+            width: 90%;
+            max-width: 1600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            text-align: justify;
+        }
+
+        .case {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        /* Decision Tree Node Styles */
+        .node circle {
+            fill: #69b3a2;
+            stroke: #555;
+            stroke-width: 2px;
+        }
+
+        .node text {
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            fill: white;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+
+        * {
+            user-select: text;
+        }
+    </style>
+</head>
+
+<header>
+    <h1>Building an AI-Powered Knowledge Repository and Search Engine for Enterprise
+        Code and Documents</h1>
+</header>
+
+<body>
+
+    <div>
+
+        <div>
+            <h2>Introduction</h2>
+            <p>My name is <strong>Ankit Dutta</strong>, and I have a <strong>B.Tech in Electrical Engineering</strong>
+                from <strong>West Bengal University of Technology (2014)</strong>. With <strong>9 years of professional
+                    experience</strong>, including <strong>6.5 years in IT</strong>, I have worked extensively in
+                <strong>AI/ML, NLP, and data-driven solutions</strong> across multiple domains, including
+                <strong>healthcare, telecom, and energy forecasting</strong>.</p>
+
+            <h3>Current Role</h3>
+            <p><strong>Senior Software Engineer (AI/ML) at Carelon Global Solutions</strong></p>
+            <ul>
+                <li>Developed an <strong>Agentic AI Bot Framework</strong> for healthcare data analysis using
+                    <strong>LlamaIndex</strong>.</li>
+                <li>Fine-tuned <strong>Google ELECTRA</strong> for <strong>intent prediction</strong>.</li>
+                <li>Implemented <strong>RoBERTa-based NER</strong> to extract medical entities from healthcare
+                    documents.</li>
+                <li>Designed a <strong>Conv1D-LSTM deep learning model</strong>, achieving <strong>92% accuracy</strong>
+                    and reducing manual review time by <strong>80%</strong>.</li>
+            </ul>
+
+            <h3>Previous Experience</h3>
+            <p><strong>ML Developer, EnigmaSoft Technologies (2022-2023)</strong></p>
+            <ul>
+                <li>Developed an <strong>Email Tagger</strong> using NLP for automated email classification.</li>
+                <li>Built <strong>Python Selenium-based web scrapers</strong> to extract UK telecom pricing data for
+                    competitive analysis.</li>
+            </ul>
+
+            <p><strong>Senior GIS Engineer, Ramtech Software Solutions (2021-2022)</strong></p>
+            <ul>
+                <li>Developed a <strong>time series forecasting model</strong> for electricity demand prediction for a
+                    <strong>UK-based client</strong>.</li>
+                <li>Applied <strong>Seasonal ARIMA and Gradient Boosted Regression</strong> to enhance predictive
+                    accuracy.</li>
+            </ul>
+
+            <p><strong>FTTH Engineer, Reliance Jio Infocomm Ltd (2018-2021)</strong></p>
+            <ul>
+                <li>Developed <strong>QoS prediction models</strong> for video streaming using <strong>Logistic
+                        Regression, Random Forest, and XGBoost</strong>.</li>
+                <li>Applied <strong>data analytics and visualization techniques</strong> to improve decision-making.
+                </li>
+            </ul>
+            <p>I am passionate about <strong>leveraging AI and ML to solve complex business challenges</strong> and
+                always eager to explore <strong>innovative solutions in AI-driven automation</strong>.</p>
+            <h3>Technical Skills</h3>
+            <ul>
+                <li><strong>Programming:</strong> Python (Pandas, NumPy, TensorFlow, Keras, PyTorch, Sklearn)</li>
+                <li><strong>NLP & LLMs:</strong> ELECTRA, RoBERTa, Attention-based models</li>
+                <li><strong>Data Science & ML:</strong> Time Series Forecasting, Regression Models, NER, Document
+                    Classification</li>
+                <li><strong>Automation & Web Scraping:</strong> Selenium, BeautifulSoup</li>
+                <li><strong>Data Retrieval & Indexing:</strong> LlamaIndex</li>
+            </ul>
+
+
+        </div>
+
+
+        <h3>Code Examples</h3>
+
+        <h4>1. Data Preprocessing</h4>
+        <pre><code>
+  import pandas as pd
+  from sklearn.model_selection import train_test_split
+  from transformers import ElectraTokenizer
+  
+  # Load FOBS change text data
+  data = pd.read_csv("fobs_change_text.csv")
+  
+  # Sample preprocessing
+  data['clean_text'] = data['change_text'].str.replace('[^a-zA-Z0-9 ]', '').str.lower()
+  
+  # Train-test split
+  train_texts, val_texts, train_labels, val_labels = train_test_split(
+      data['clean_text'], data['intent_label'], test_size=0.2, random_state=42
+  )
+  
+  # Tokenize using ELECTRA tokenizer
+  tokenizer = ElectraTokenizer.from_pretrained('google/electra-small-discriminator')
+  train_encodings = tokenizer(list(train_texts), truncation=True, padding=True)
+  val_encodings = tokenizer(list(val_texts), truncation=True, padding=True)
+    </code></pre>
+
+        <h4>2. Fine-Tuning ELECTRA for Intent Prediction</h4>
+        <pre><code>
+  import torch
+  from transformers import ElectraForSequenceClassification, Trainer, TrainingArguments
+  
+  # Prepare ELECTRA model
+  model = ElectraForSequenceClassification.from_pretrained('google/electra-small-discriminator', num_labels=3)
+  
+  # Prepare dataset class
+  class FOBSDataset(torch.utils.data.Dataset):
+      def __init__(self, encodings, labels):
+          self.encodings = encodings
+          self.labels = labels
+  
+      def __getitem__(self, idx):
+          item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
+          item['labels'] = torch.tensor(self.labels[idx])
+          return item
+  
+      def __len__(self):
+          return len(self.labels)
+  
+  # Create datasets
+  train_dataset = FOBSDataset(train_encodings, train_labels.tolist())
+  val_dataset = FOBSDataset(val_encodings, val_labels.tolist())
+  
+  # Training arguments
+  training_args = TrainingArguments(
+      output_dir='./results',
+      evaluation_strategy="epoch",
+      per_device_train_batch_size=16,
+      per_device_eval_batch_size=16,
+      num_train_epochs=4,
+      weight_decay=0.01,
+      logging_dir='./logs',
+  )
+  
+  # Trainer
+  trainer = Trainer(
+      model=model,
+      args=training_args,
+      train_dataset=train_dataset,
+      eval_dataset=val_dataset,
+  )
+  
+  # Fine-tune ELECTRA
+  trainer.train()
+    </code></pre>
+
+        <h4>3. Benefit vs. GBA Classification</h4>
+        <pre><code>
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.metrics import classification_report
+  
+  # Get ELECTRA embeddings for the clean text
+  def get_embeddings(texts):
+      inputs = tokenizer(texts, return_tensors="pt", truncation=True, padding=True)
+      with torch.no_grad():
+          outputs = model.electra(**inputs)
+      return outputs.last_hidden_state.mean(dim=1).numpy()
+  
+  # Generate embeddings
+  train_embeddings = get_embeddings(list(train_texts))
+  val_embeddings = get_embeddings(list(val_texts))
+  
+  # Train Logistic Regression classifier
+  clf = LogisticRegression(max_iter=1000)
+  clf.fit(train_embeddings, data.loc[train_texts.index, 'benefit_gba_label'])
+  
+  # Evaluate classifier
+  preds = clf.predict(val_embeddings)
+  print(classification_report(data.loc[val_texts.index, 'benefit_gba_label'], preds))
+    </code></pre>
+
+        <h4>4. Entity Extraction using Rasa</h4>
+        <pre><code>
+  # Sample Rasa NLU pipeline configuration (config.yml)
+  pipeline:
+    - name: WhitespaceTokenizer
+    - name: RegexFeaturizer
+    - name: CRFEntityExtractor
+    - name: DIETClassifier
+      epochs: 100
+    - name: EntitySynonymMapper
+  
+  # Sample NLU training data (nlu.yml)
+  nlu:
+  - intent: change_benefit
+    examples: |
+      - Change the benefit amount to $500 starting from [March 1st](start_date)
+      - Update the [GBA1234](gba_code) plan for user [John Doe](user_name)
+  
+  # Python Code to Run Entity Extraction
+  from rasa.nlu.model import Interpreter
+  
+  # Load trained Rasa model
+  interpreter = Interpreter.load("./models")
+  
+  # Parse new change text
+  message = "Please update benefit coverage starting from April 5th for user Sarah Connor."
+  result = interpreter.parse(message)
+  
+  # Output extracted entities
+  print("Intent:", result['intent']['name'])
+  print("Entities:", result['entities'])
+    </code></pre>
+
+        <h4>5. Evaluation Metrics</h4>
+        <pre><code>
+  from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+  
+  # For ELECTRA intent prediction
+  intent_preds = trainer.predict(val_dataset)
+  intent_labels = intent_preds.label_ids
+  intent_predictions = intent_preds.predictions.argmax(axis=1)
+  
+  acc = accuracy_score(intent_labels, intent_predictions)
+  precision, recall, f1, _ = precision_recall_fscore_support(intent_labels, intent_predictions, average='weighted')
+  
+  print(f"Intent Prediction - Accuracy: {acc:.2f}, Precision: {precision:.2f}, Recall: {recall:.2f}, F1: {f1:.2f}")
+  
+  # For Benefit vs. GBA classification
+  print("Benefit vs. GBA Classification Report:")
+  print(classification_report(data.loc[val_texts.index, 'benefit_gba_label'], preds))
+    </code></pre>
+    </div>
+</body>
+
+</html>

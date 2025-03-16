@@ -186,83 +186,75 @@
 <body>
 
     <div class="failure-cases">
-        <div class="case">
-            <html>
-                <head>
-                    <title>AI-Powered Knowledge Repository</title>
-                </head>
-                <body>
-                    <h1>AI-Powered Knowledge Repository and Search Engine for Enterprise Code and Documents</h1>
-                    
-                    <h2>Project Overview</h2>
-                    <p>This project aims to build a centralized repository for enterprise code and documents, enabling efficient search and retrieval using AI-powered semantic understanding and analysis. By leveraging AI/ML techniques such as Natural Language Processing (NLP), Optical Character Recognition (OCR), and machine learning models for classification and entity recognition, the system enhances document accessibility and organization.</p>
-                    
-                    <h2>Key Components and Functionality</h2>
-                    <h3>Data Ingestion and Processing</h3>
+        <div>
+            <h2>AI-Powered Knowledge Repository and Document Classification</h2>
+            
+            <h3>Project Overview</h3>
+            <p>This project aims to build a centralized knowledge repository for enterprise documents, enabling efficient search and retrieval using AI-powered semantic understanding and classification. By leveraging deep learning models such as <strong>Conv1D and LSTM</strong> for document classification, the system enhances document accessibility, organization, and retrieval accuracy.</p>
+            
+            <h3>Key Components and Functionality</h3>
+            <h4>Data Ingestion and Processing</h4>
+            <ul>
+                <li><strong>Crawler & Delta:</strong> Collects documents from various sources like SharePoint and S3 buckets, focusing on incremental updates.</li>
+                <li><strong>Nightly Document Delta Job Scheduler:</strong> Automates the crawling and updating process.</li>
+                <li><strong>Document Processing Pipeline:</strong> Handles document format conversion, metadata extraction, and text preprocessing.</li>
+                <li><strong>Data Extraction/OCR:</strong> Utilizes Textract and openpyxl for extracting text, including OCR for scanned documents.</li>
+                <li><strong>Snippet Creation:</strong> Breaks down documents into smaller, searchable chunks for efficient retrieval.</li>
+            </ul>
+            
+            <h3>AI-Driven Document Classification</h3>
+            <h4>Model Choice: Conv1D + LSTM</h4>
+            <p>To improve document categorization and retrieval, we implemented a <strong>hybrid deep learning model</strong> combining <strong>1D Convolutional Neural Networks (Conv1D)</strong> and <strong>Long Short-Term Memory (LSTM)</strong> networks.</p>
+            
+            <h4>Working Mechanism</h4>
+            <ol>
+                <li><strong>Text Preprocessing:</strong>
                     <ul>
-                        <li><b>Crawler & Delta:</b> Collects documents from various sources like SharePoint and S3 buckets, focusing on incremental updates and changes.</li>
-                        <li><b>Nightly Document Delta Job Scheduler:</b> Automates the crawling and updating process.</li>
-                        <li><b>SOT Doc Pipeline & Delta:</b> Processes ingested documents, including format conversion, metadata extraction, and text preprocessing.</li>
-                        <li><b>Data Extraction/OCR:</b> Utilizes Textract and openpyxl for extracting text, including OCR for scanned documents.</li>
-                        <li><b>Snippet Creation:</b> Breaks down documents into smaller, searchable chunks.</li>
+                        <li>Tokenization using TensorFlow/Keras Tokenizer.</li>
+                        <li>Padding to ensure uniform input length.</li>
+                        <li>Word embedding with pre-trained word vectors (e.g., GloVe).</li>
                     </ul>
-                    
-                    <h3>AI-Driven Understanding and Enrichment</h3>
+                </li>
+                <li><strong>Feature Extraction using Conv1D:</strong>
                     <ul>
-                        <li><b>Document Classification:</b> Uses deep learning and traditional ML models to categorize documents for better organization and retrieval.</li>
-                        <li><b>Custom Named Entity Recognition (NER):</b> Extracts key entities (e.g., people, organizations, locations) to enrich metadata.</li>
-                        <li><b>Recognize Entities:</b> Identifies domain-specific entities for improved searchability.</li>
-                        <li><b>Large Language Model (LLM) Integration:</b> Enhances semantic understanding, calculates coverage and limits, and refines the "Source of Truth" (SOT) data model.</li>
-                        <li><b>Classification/Semantic Model (FAISS):</b> Implements FAISS for similarity search and document clustering based on semantic meaning.</li>
+                        <li>Convolutional layers capture local patterns in text.</li>
+                        <li>Max-pooling reduces dimensionality and retains essential features.</li>
                     </ul>
-                    
-                    <h3>Data Storage and Management</h3>
+                </li>
+                <li><strong>Contextual Learning using LSTM:</strong>
                     <ul>
-                        <li><b>EFS (Elastic File System):</b> Temporary storage during processing.</li>
-                        <li><b>MongoDB (Metadata Storage):</b> Stores document metadata and revision history.</li>
-                        <li><b>S3 Bucket (Documents):</b> Stores actual document files.</li>
-                        <li><b>Knowledge Graph (MongoDB):</b> Captures relationships between entities and concepts.</li>
-                        <li><b>Facets Data Model (MongoDB):</b> Stores facets (categories/filters) for navigation.</li>
-                        <li><b>MySQL Aurora (Facets Staging):</b> Staging database for facets before finalization.</li>
+                        <li>LSTM layers capture long-term dependencies in document content.</li>
+                        <li>Outputs sequential context-aware representations.</li>
                     </ul>
-                    
-                    <h3>Search and Retrieval</h3>
+                </li>
+                <li><strong>Classification Layer:</strong>
                     <ul>
-                        <li><b>Amazon Kendra:</b> Provides enterprise search with indexing capabilities.</li>
-                        <li><b>Search Engine (UI & APIs):</b> Interfaces for user interaction.</li>
-                        <li><b>Facets Code, Coverage, Limits:</b> Enhances filtering of search results.</li>
-                        <li><b>Mapping Engine:</b> Maps search queries to relevant documents and concepts in the knowledge graph.</li>
+                        <li>Fully connected (Dense) layer with <strong>Softmax activation</strong> for multi-class document classification.</li>
+                        <li>Optimized using <strong>Categorical Cross-Entropy Loss</strong> and <strong>Adam optimizer</strong>.</li>
                     </ul>
-                    
-                    <h3>User Interface and Access</h3>
-                    <ul>
-                        <li><b>Users (GURU UI):</b> Dedicated UI for searching documents, code snippets, and information.</li>
-                    </ul>
-                    
-                    <h2>AI/ML Contributions</h2>
-                    <h3>Named Entity Recognition (NER)</h3>
-                    <p>I developed an NER model to extract entities such as people, organizations, and locations from documents. This involved fine-tuning models like spaCy with domain-specific data to improve accuracy. The model was integrated into the broader pipeline to tag documents with entities, enabling advanced search functionalities.</p>
-                    
-                    <h3>Document Classification</h3>
-                    <p>I implemented classification models using deep learning techniques, including LSTM and BERT, to categorize documents accurately based on content. Fine-tuning BERT on enterprise data improved its generalization and accuracy in document classification.</p>
-                    
-                    <h3>Semantic Search & Knowledge Graph Construction</h3>
-                    <p>By leveraging LLMs and FAISS, I contributed to improving the search experience by focusing on query meaning rather than just keywords. I also helped build a knowledge graph that captured entity relationships, enhancing search relevance.</p>
-                    
-                    <h2>Challenges and Solutions</h2>
-                    <ul>
-                        <li><b>Data Quality:</b> Worked with data engineers to clean and preprocess data, improving model performance.</li>
-                        <li><b>Model Generalization:</b> Used transfer learning to fine-tune models for diverse enterprise documents.</li>
-                        <li><b>Scalability:</b> Optimized AI models and collaborated with the infrastructure team to ensure efficient processing of large document volumes.</li>
-                    </ul>
-                    
-                    <h2>Impact and Results</h2>
-                    <p>My contributions to NER and document classification significantly improved the system's search accuracy and efficiency. The AI-powered search engine enhanced semantic understanding, leading to better user satisfaction and streamlined document retrieval. This project successfully built a robust, AI-driven knowledge management system, making enterprise information assets more accessible and valuable.</p>
-                </body>
-                </html>
-                
-                
+                </li>
+            </ol>
+        
+            
+            <h3>Challenges & Solutions</h3>
+            <ul>
+                <li><strong>Handling Diverse Document Types:</strong> Used <strong>custom embeddings</strong> and <strong>pre-trained word vectors</strong> for better text representation.</li>
+                <li><strong>Class Imbalance:</strong> Applied <strong>class weighting</strong> and <strong>data augmentation</strong> (synonym replacement, paraphrasing) to balance dataset.</li>
+                <li><strong>Scalability for Large Volumes:</strong> Optimized model <strong>batch processing</strong> and integrated with <strong>cloud-based storage</strong> (S3, MongoDB) for large-scale processing.</li>
+            </ul>
+            
+            <h3>Impact and Results</h3>
+            <ul>
+                <li><strong>Improved Classification Accuracy:</strong> Achieved <strong>~92% accuracy</strong> in document classification across multiple categories.</li>
+                <li><strong>Enhanced Search Efficiency:</strong> Semantic classification enabled more relevant and precise search results.</li>
+                <li><strong>Scalable Architecture:</strong> The system is designed to handle <strong>large volumes of enterprise documents</strong>, ensuring smooth integration with existing workflows.</li>
+            </ul>
+            
+            <h3>Conclusion</h3>
+            <p>This project successfully implemented an <strong>AI-powered document classification system</strong> using <strong>Conv1D and LSTM</strong>, significantly improving the <strong>organization and retrieval of enterprise documents</strong>. Future work includes enhancing semantic search with <strong>transformer-based models (e.g., BERT, RoBERTa)</strong> for even more accurate classification and retrieval.</p>
         </div>
+        
+        
     </div>
 
 </body>

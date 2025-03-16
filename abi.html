@@ -179,483 +179,146 @@
 </head>
 
 <header>
-    <h1>Building an AI-Powered Knowledge Repository and Search Engine for Enterprise
-        Code and Documents</h1>
+    <h1>Automated Benefit Integration (ABI)</h1>
 </header>
 
 <body>
 
     <div class="failure-cases">
-        <div class="case">
-            <div style="font-family: 'Courier New', monospace; padding: 10px; border: 1px solid #ddd;">
-                <div>
-                    <p>This project aims to create a centralized repository for enterprise code and documents, enabling
-                        efficient search and retrieval of information using AI-powered semantic understanding and
-                        analysis. The system will leverage various AI/ML techniques, including Natural Language
-                        Processing (NLP), Optical Character Recognition (OCR), and potentially machine learning models
-                        for classification and entity recognition.</p>
-
-                    <h3>Key Components and Functionality:</h3>
+        <div>
+            <h1>Automated Benefit Integration (ABI)</h1>
+            <h2>Project Overview: AI-Driven Workflow Automation for Sales and Benefit Configuration</h2>
+        
+            <h2>Objective</h2>
+            <p>Automated Benefit Integration (ABI) is an AI-powered solution designed to streamline and automate workflows from sales enablement to benefit configuration. It serves as a digital front door for Sales and Account Management teams, enabling them to:</p>
+            <ul>
+                <li>Accurately capture client modifications and plan adjustments.</li>
+                <li>Eliminate manual paperwork and reduce human errors.</li>
+                <li>Improve implementation efficiency and accelerate deployment.</li>
+                <li>Enhance automation for seamless integration with downstream systems.</li>
+            </ul>
+            <p><strong>Example Change Text:</strong> "Update air ambulance coins to $45 INN"</p>
+        
+            <h2>Solution Approach</h2>
+        
+            <h3>1. Data Preprocessing</h3>
+            <ul>
+                <li><strong>Data Collection & Cleaning:</strong> Extracted and processed "change text" from the FOBS dataset.</li>
+                <li><strong>Text Normalization:</strong> Tokenized text, removed special characters, standardized numerical values, and lowercased the text.</li>
+                <li><strong>Handling Class Imbalance:</strong> Applied <em>Down Sampling</em> to ensure fair representation across different categories.</li>
+            </ul>
+        
+            <h3>2. Intent Prediction using ELECTRA</h3>
+            <ul>
+                <li><strong>Model Choice:</strong> Fine-tuned <em>ELECTRA (Efficiently Learning an Encoder that Classifies Token Replacements Accurately)</em> for high-accuracy classification.</li>
+                <li><strong>Architecture:</strong>
                     <ul>
-                        <li><strong>Data Ingestion and Processing:</strong>
-                            <ul>
-                                <li><strong>1.0 Crawler & Delta:</strong> This component is responsible for collecting
-                                    documents from various sources like SharePoint and S3 buckets. The "Delta" aspect
-                                    suggests it focuses on incremental updates and changes.</li>
-                                <li><strong>Nightly Document Delta Job Scheduler:</strong> This schedules the crawling
-                                    and updating process.</li>
-                                <li><strong>SOT Doc Pipeline & Delta:</strong> This pipeline processes the ingested
-                                    documents, likely involving steps like format conversion, metadata extraction, and
-                                    text preprocessing.</li>
-                                <li><strong>Data Extraction/OCR:</strong> Components like Textract and openpyxl are used
-                                    to extract text from different document formats, including OCR for images or scanned
-                                    documents.</li>
-                                <li><strong>Snippet Creation:</strong> This step likely involves breaking down documents
-                                    into smaller, searchable chunks or snippets.</li>
-                            </ul>
-                        </li>
-
-                        <li><strong>AI-Driven Understanding and Enrichment:</strong>
-                            <ul>
-                                <li><strong>2.0 Doc Classifier:</strong> This component classifies documents using the
-                                    "2.0 Docs" classification model, potentially using techniques like deep learning or
-                                    traditional machine learning.</li>
-                                <li><strong>Custom NER (Named Entity Recognition):</strong> This component identifies
-                                    and extracts key entities (e.g., people, organizations, locations) from the text.
-                                </li>
-                                <li><strong>Recognize Entities:</strong> Similar to NER, this focuses on identifying and
-                                    extracting specific entities relevant to the domain.</li>
-                                <li><strong>LLM (Large Language Model):</strong> This likely plays a crucial role in
-                                    understanding the semantics of the text, calculating coverage and limits, and
-                                    generating the final "SOT" (Source of Truth) data model.</li>
-                                <li><strong>Classification/Semantic Model (FAISS):</strong> FAISS (Facebook AI
-                                    Similarity Search) is used for efficient similarity search and clustering of
-                                    documents based on their semantic meaning.</li>
-                            </ul>
-                        </li>
-
-                        <li><strong>Data Storage and Management:</strong>
-                            <ul>
-                                <li><strong>EFS (Elastic File System):</strong> Provides temporary storage during
-                                    processing.</li>
-                                <li><strong>Mongo DB (Metadata Storage):</strong> Stores document metadata and revision
-                                    history.</li>
-                                <li><strong>S3 Bucket (Documents):</strong> Stores the actual document files.</li>
-                                <li><strong>Knowledge Graph (Mongo DB):</strong> Stores relationships between entities
-                                    and concepts extracted from the documents.</li>
-                                <li><strong>Facets Data Model (Mongo DB):</strong> Stores data related to facets
-                                    (categories or filters) for search and navigation.</li>
-                                <li><strong>MySQL Aurora (Facets Staging):</strong> A relational database used for
-                                    staging facet data before it's finalized.</li>
-                            </ul>
-                        </li>
-
-                        <li><strong>Search and Retrieval:</strong>
-                            <ul>
-                                <li><strong>Amazon Kendra:</strong> An enterprise search service that likely integrates
-                                    with the system to provide indexing and search capabilities.</li>
-                                <li><strong>Kendra 1.0 Search:</strong> Represents an earlier version of the search
-                                    functionality.</li>
-                                <li><strong>Search Engine (UI & APIs):</strong> Provides the user interface and APIs for
-                                    searching the repository.</li>
-                                <li><strong>Facets Code, Coverage, Limits:</strong> These components relate to specific
-                                    search facets, enabling users to filter results based on code details, coverage, or
-                                    limits.</li>
-                                <li><strong>Mapping Engine:</strong> Likely used to map search queries to relevant
-                                    documents or concepts in the knowledge graph.</li>
-                            </ul>
-                        </li>
-
-                        <li><strong>User Interface and Access:</strong>
-                            <ul>
-                                <li><strong>Users (GURU UI):</strong> Users interact with the system through a dedicated
-                                    UI to search for documents, code snippets, or information.</li>
-                            </ul>
-                        </li>
+                        <li>Input: Tokenized "change text".</li>
+                        <li>Output: Intent classification into categories such as Modify, Add, Remove, Update, Clarify, etc.</li>
+                        <li>Loss Function: Categorical Cross-Entropy for multi-class classification.</li>
+                        <li>Fine-tuning: Applied transfer learning on domain-specific data.</li>
                     </ul>
-
-                    <h3>AI/ML Focus:</h3>
+                </li>
+            </ul>
+        
+            <h3>3. Benefit vs. GBA Classification using BERT</h3>
+            <ul>
+                <li><strong>Model Choice:</strong> Fine-tuned <em>BERT (Bidirectional Encoder Representations from Transformers)</em> for text classification.</li>
+                <li><strong>Working Mechanism:</strong>
                     <ul>
-                        <li><strong>Semantic Search:</strong> Utilizing LLMs and FAISS to enable search based on the
-                            meaning of the query rather than just keywords.</li>
-                        <li><strong>Document Classification:</strong> Automatically categorizing documents for easier
-                            organization and retrieval.</li>
-                        <li><strong>Named Entity Recognition:</strong> Extracting key entities to enrich the data and
-                            enable faceted search.</li>
-                        <li><strong>Knowledge Graph Construction:</strong> Building a knowledge graph to capture
-                            relationships between concepts and improve search relevance.</li>
-                    </ul>
-
-                    <h3>Potential Use Cases:</h3>
-                    <ul>
-                        <li>Finding relevant code examples or documentation.</li>
-                        <li>Searching for information related to specific projects or topics.</li>
-                        <li>Identifying experts on particular subjects.</li>
-                        <li>Understanding the relationships between different concepts in the enterprise knowledge base.
+                        <li><strong>Tokenization:</strong> Used BERT’s WordPiece tokenizer to split input text into subword tokens.</li>
+                        <li><strong>Embedding & Contextual Representation:</strong> The pre-trained BERT model converts tokens into dense vector embeddings while preserving bidirectional context.</li>
+                        <li><strong>Classification Layer:</strong> 
+                            <ul>
+                                <li>The output from BERT’s [CLS] token representation is passed through a fully connected layer.</li>
+                                <li>A softmax activation function is used to predict whether the input belongs to the "Benefit" or "GBA" category.</li>
+                            </ul>
                         </li>
+                        <li><strong>Optimization:</strong> Fine-tuned using the AdamW optimizer and cross-entropy loss.</li>
                     </ul>
-
-                    <h3>Challenges and Considerations:</h3>
+                </li>
+                <li><strong>Challenges & Solutions:</strong>
                     <ul>
-                        <li><strong>Data Quality and Consistency:</strong> Ensuring the accuracy and consistency of data
-                            from various sources.</li>
-                        <li><strong>Scalability:</strong> Designing the system to handle a large volume of documents and
-                            user requests.</li>
-                        <li><strong>Performance:</strong> Optimizing the search and retrieval process for speed and
-                            efficiency.</li>
-                        <li><strong>Security:</strong> Protecting sensitive information within the repository.</li>
+                        <li><strong>Overlapping Features Between Benefit & GBA:</strong> Used TF-IDF analysis to refine class boundaries.</li>
+                        <li><strong>Limited Training Data:</strong> Applied data augmentation techniques such as back-translation and synonym replacement.</li>
                     </ul>
-
-                    <p>Overall, this project aims to build a powerful AI-driven knowledge management system that
-                        empowers users to efficiently access and leverage enterprise information assets. Let me know if
-                        you'd like me to elaborate on any specific component or aspect of this project!</p>
-                </div>
-
-            </div>
+                </li>
+            </ul>
+        
+            <h3>4. Entity Extraction using RoBERTa</h3>
+            <ul>
+                <li><strong>Model Choice:</strong> Fine-tuned RoBERTa for Named Entity Recognition (NER).</li>
+                <li><strong>Entities Extracted:</strong>
+                    <ul>
+                        <li>Benefit Name (e.g., Air Ambulance, Urgent Care)</li>
+                        <li>Benefit Option (e.g., Deductible, Copayment)</li>
+                        <li>UOM (e.g., "$45", "10%", "per visit")</li>
+                        <li>Network (e.g., "In-Network", "Out-of-Network")</li>
+                    </ul>
+                </li>
+            </ul>
+        
+            <h3>5. Evaluation & Optimization</h3>
+            <ul>
+                <li><strong>Evaluation Metrics:</strong>
+                    <ul>
+                        <li>Intent Prediction: 90% F1-score</li>
+                        <li>Benefit vs. GBA Classification: 90% accuracy</li>
+                        <li>Entity Extraction: 85% accuracy</li>
+                    </ul>
+                </li>
+                <li><strong>Optimization Strategies:</strong>
+                    <ul>
+                        <li>Hyperparameter tuning using Bayesian Optimization.</li>
+                        <li>Handled class imbalance via re-weighting loss functions.</li>
+                        <li>Explored ensemble learning (BERT + RoBERTa) for robustness.</li>
+                    </ul>
+                </li>
+            </ul>
+        
+            <h2>Challenges & Solutions</h2>
+            <table border="1">
+                <tr>
+                    <th>Challenge</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td>Ambiguous Change Texts</td>
+                    <td>Fine-tuned ELECTRA with domain-specific data to improve intent understanding.</td>
+                </tr>
+                <tr>
+                    <td>Class Imbalance</td>
+                    <td>Applied class weighting, SMOTE, and data augmentation techniques.</td>
+                </tr>
+                <tr>
+                    <td>Complex Entity Structures</td>
+                    <td>Used RoBERTa + CRF for overlapping entities and ensured correct classification of related fields.</td>
+                </tr>
+                <tr>
+                    <td>Pipeline Integration</td>
+                    <td>Built a modular AI pipeline for intent prediction, classification, and entity extraction.</td>
+                </tr>
+            </table>
+        
+            <h2>Impact & Results</h2>
+            <ul>
+                <li><strong>Accuracy Gains:</strong>
+                    <ul>
+                        <li>Intent Prediction: ~90% accuracy</li>
+                        <li>Benefit vs. GBA Classification: ~90% accuracy</li>
+                        <li>Entity Extraction: ~85% accuracy</li>
+                    </ul>
+                </li>
+                <li><strong>Efficiency Improvements:</strong> 40% reduction in processing time.</li>
+                <li><strong>Enhanced Data Insights:</strong> Extracted granular data points for improved downstream analytics.</li>
+                <li><strong>Scalability & Integration:</strong> Designed for seamless integration into existing FOBS workflows.</li>
+            </ul>
+        
+            <h2>Conclusion</h2>
+            <p>Automated Benefit Integration (ABI) leverages AI-driven intent prediction, classification, and entity extraction to revolutionize benefit configuration. By automating manual processes, improving accuracy, and accelerating decision-making, ABI enhances operational efficiency and scalability for sales and account management teams.</p>
         </div>
-    </div>
-
-    <div class="failure-cases">
-        <div class="case" style="font-family: 'Courier New', monospace; padding: 10px; border: 1px solid #ddd;">
-            <div>
-                <h2>Project Overview: Building an AI-Powered Knowledge Repository and Search Engine for Enterprise Code
-                    and Documents</h2>
-                <p>In this project, I worked as an AI engineer where my main focus was on implementing **Named Entity
-                    Recognition (NER)** and **document classification** to help build a centralized repository for
-                    enterprise code and documents. The goal was to enable efficient search and retrieval of information
-                    using AI-powered semantic understanding and analysis. We utilized a variety of AI/ML techniques,
-                    including NLP and machine learning models for entity recognition and document classification.</p>
-
-                <h3>Key Responsibilities and Contributions:</h3>
-                <ul>
-                    <li><strong>Named Entity Recognition (NER):</strong>
-                        <p>One of my core contributions was developing the NER model to extract key entities such as
-                            people, organizations, and locations from the documents. This involved fine-tuning existing
-                            NER models to suit the specific requirements of our enterprise domain. The goal was to
-                            enhance the document’s semantic structure and make it easier for users to retrieve the most
-                            relevant information based on entities.</p>
-                        <p>We used pre-trained models like spaCy and fine-tuned them with domain-specific data to
-                            improve accuracy. I also worked on integrating this NER model with the broader pipeline to
-                            tag documents with entities, enabling the search engine to understand and filter results
-                            based on recognized entities.</p>
-                    </li>
-
-                    <li><strong>Document Classification:</strong>
-                        <p>Another key area of my work was **document classification**. We built a model to categorize
-                            incoming documents into predefined classes. This made it easier to organize and retrieve
-                            documents based on their content, significantly improving the user experience. I implemented
-                            classification models using deep learning techniques and also explored traditional machine
-                            learning algorithms.</p>
-                        <p>For classification, we leveraged techniques such as LSTM (Long Short-Term Memory) networks
-                            and BERT (Bidirectional Encoder Representations from Transformers). These models helped us
-                            classify documents accurately based on their semantic meaning. Fine-tuning BERT on our
-                            dataset allowed for better generalization across different types of documents in the
-                            enterprise repository.</p>
-                    </li>
-
-                    <li><strong>AI-Driven Understanding and Enrichment:</strong>
-                        <p>In addition to NER and classification, I collaborated on integrating the **Large Language
-                            Model (LLM)** into our workflow. The LLM helped us understand the semantics of documents,
-                            calculate coverage, and refine the final "Source of Truth" data model.</p>
-                        <p>By using a combination of AI-driven enrichment and semantic search models, I was able to help
-                            the system interpret complex user queries and retrieve highly relevant documents from the
-                            knowledge base.</p>
-                    </li>
-                </ul>
-
-                <h3>AI/ML Focus:</h3>
-                <ul>
-                    <li><strong>Semantic Search:</strong> Leveraged LLMs and FAISS (Facebook AI Similarity Search) to
-                        improve the search experience by focusing on the meaning of the query rather than just keywords.
-                    </li>
-                    <li><strong>Named Entity Recognition:</strong> My work in NER helped to identify and enrich
-                        documents with key entities, improving the accuracy of document retrieval and enabling advanced
-                        search functionalities.</li>
-                    <li><strong>Document Classification:</strong> I developed the classification system that allowed
-                        documents to be organized based on their content, which streamlined the process of finding
-                        relevant information.</li>
-                    <li><strong>Knowledge Graph Construction:</strong> I also contributed to building the knowledge
-                        graph that captured relationships between entities and concepts within the documents, enhancing
-                        the search relevance.</li>
-                </ul>
-
-                <h3>Challenges and Problem-Solving:</h3>
-                <ul>
-                    <li><strong>Data Quality:</strong> A challenge was ensuring that the data fed into the NER and
-                        classification models was high quality. I worked closely with the data engineering team to clean
-                        and preprocess the text data, which significantly improved the model's performance.</li>
-                    <li><strong>Model Generalization:</strong> Fine-tuning the models to generalize across various types
-                        of documents in the enterprise repository was another challenge. To address this, I used
-                        transfer learning techniques to adapt pre-trained models to our specific domain.</li>
-                    <li><strong>Scalability:</strong> The solution needed to handle a large volume of documents and
-                        queries. I collaborated with the infrastructure team to ensure the AI models were optimized for
-                        performance and scalability, enabling fast and accurate retrieval.</li>
-                </ul>
-
-                <h3>Impact and Results:</h3>
-                <p>My contributions to the NER and document classification components had a significant impact on the
-                    overall performance of the knowledge repository. With more accurate entity extraction and better
-                    document categorization, the system became much more efficient in serving user queries. The
-                    AI-powered search system was able to understand the semantic context of queries, leading to better
-                    search results and user satisfaction.</p>
-                <p>Overall, this project helped build a robust, AI-driven knowledge management system that greatly
-                    improved the accessibility and usefulness of enterprise documents.</p>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="failure-cases">
-        <div class="case" style="font-family: 'Courier New', monospace; padding: 10px; border: 1px solid #ddd;">
-            <div>
-                <h2>Project Overview: FOBS Data - Intent Prediction and Classification</h2>
-                <p><strong>Objective:</strong><br>
-                    The project aimed to process user-submitted "change text" from the FOBS system, predict its intent
-                    using ELECTRA, and classify the text into two categories: <strong>"Benefit"</strong> or
-                    <strong>"GBA"</strong>. This helped in automating workflows and reducing manual review.
-                </p>
-                <div>
-                    <h2>Project Overview: FOBS Data - Intent Prediction, Classification, and Entity Extraction</h2>
-                    <p><strong>Objective:</strong><br>
-                        The project aimed to process user-submitted "change text" from the FOBS system, predict its
-                        intent using ELECTRA, classify the text into two categories: <strong>"Benefit"</strong> or
-                        <strong>"GBA"</strong>, and extract key entities using Rasa for deeper insights and downstream
-                        processing.
-                    </p>
-                </div>
-
-                <div>
-                    <h3>Solution Approach</h3>
-                    <ol>
-                        <li><strong>Data Preprocessing:</strong>
-                            <ul>
-                                <li>Collected and cleaned the FOBS "change text" data.</li>
-                                <li>Performed tokenization, removed special characters, and handled class imbalance.
-                                </li>
-                            </ul>
-                        </li>
-                        <li><strong>Intent Prediction using ELECTRA:</strong>
-                            <ul>
-                                <li>Fine-tuned the ELECTRA model to predict the user's intent behind the change text.
-                                </li>
-                            </ul>
-                        </li>
-                        <li><strong>Benefit vs. GBA Classification:</strong>
-                            <ul>
-                                <li>Built a custom classifier on top of the intent prediction to classify the change
-                                    text into <strong>"Benefit"</strong> or <strong>"GBA"</strong>.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Entity Extraction using Rasa:</strong>
-                            <ul>
-                                <li>Integrated Rasa NLU to extract key entities such as dates, benefit types, GBA codes,
-                                    and user-specific fields from the change text.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Evaluation & Optimization:</strong>
-                            <ul>
-                                <li>Used metrics like <strong>F1-score</strong>, <strong>Precision</strong>, and
-                                    <strong>Recall</strong> to evaluate model performance.
-                                </li>
-                                <li>Addressed challenges like data imbalance, ambiguous text, and entity overlap through
-                                    advanced techniques.</li>
-                            </ul>
-                        </li>
-                    </ol>
-                </div>
-
-                <div>
-                    <h3>Code Examples</h3>
-
-                    <h4>1. Data Preprocessing</h4>
-                    <pre><code>
-                  import pandas as pd
-                  from sklearn.model_selection import train_test_split
-                  from transformers import ElectraTokenizer
-                  
-                  # Load FOBS change text data
-                  data = pd.read_csv("fobs_change_text.csv")
-                  
-                  # Sample preprocessing
-                  data['clean_text'] = data['change_text'].str.replace('[^a-zA-Z0-9 ]', '').str.lower()
-                  
-                  # Train-test split
-                  train_texts, val_texts, train_labels, val_labels = train_test_split(
-                      data['clean_text'], data['intent_label'], test_size=0.2, random_state=42
-                  )
-                  
-                  # Tokenize using ELECTRA tokenizer
-                  tokenizer = ElectraTokenizer.from_pretrained('google/electra-small-discriminator')
-                  train_encodings = tokenizer(list(train_texts), truncation=True, padding=True)
-                  val_encodings = tokenizer(list(val_texts), truncation=True, padding=True)
-                    </code></pre>
-
-                    <h4>2. Fine-Tuning ELECTRA for Intent Prediction</h4>
-                    <pre><code>
-                  import torch
-                  from transformers import ElectraForSequenceClassification, Trainer, TrainingArguments
-                  
-                  # Prepare ELECTRA model
-                  model = ElectraForSequenceClassification.from_pretrained('google/electra-small-discriminator', num_labels=3)
-                  
-                  # Prepare dataset class
-                  class FOBSDataset(torch.utils.data.Dataset):
-                      def __init__(self, encodings, labels):
-                          self.encodings = encodings
-                          self.labels = labels
-                  
-                      def __getitem__(self, idx):
-                          item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
-                          item['labels'] = torch.tensor(self.labels[idx])
-                          return item
-                  
-                      def __len__(self):
-                          return len(self.labels)
-                  
-                  # Create datasets
-                  train_dataset = FOBSDataset(train_encodings, train_labels.tolist())
-                  val_dataset = FOBSDataset(val_encodings, val_labels.tolist())
-                  
-                  # Training arguments
-                  training_args = TrainingArguments(
-                      output_dir='./results',
-                      evaluation_strategy="epoch",
-                      per_device_train_batch_size=16,
-                      per_device_eval_batch_size=16,
-                      num_train_epochs=4,
-                      weight_decay=0.01,
-                      logging_dir='./logs',
-                  )
-                  
-                  # Trainer
-                  trainer = Trainer(
-                      model=model,
-                      args=training_args,
-                      train_dataset=train_dataset,
-                      eval_dataset=val_dataset,
-                  )
-                  
-                  # Fine-tune ELECTRA
-                  trainer.train()
-                    </code></pre>
-
-                    <h4>3. Benefit vs. GBA Classification</h4>
-                    <pre><code>
-                  from sklearn.linear_model import LogisticRegression
-                  from sklearn.metrics import classification_report
-                  
-                  # Get ELECTRA embeddings for the clean text
-                  def get_embeddings(texts):
-                      inputs = tokenizer(texts, return_tensors="pt", truncation=True, padding=True)
-                      with torch.no_grad():
-                          outputs = model.electra(**inputs)
-                      return outputs.last_hidden_state.mean(dim=1).numpy()
-                  
-                  # Generate embeddings
-                  train_embeddings = get_embeddings(list(train_texts))
-                  val_embeddings = get_embeddings(list(val_texts))
-                  
-                  # Train Logistic Regression classifier
-                  clf = LogisticRegression(max_iter=1000)
-                  clf.fit(train_embeddings, data.loc[train_texts.index, 'benefit_gba_label'])
-                  
-                  # Evaluate classifier
-                  preds = clf.predict(val_embeddings)
-                  print(classification_report(data.loc[val_texts.index, 'benefit_gba_label'], preds))
-                    </code></pre>
-
-                    <h4>4. Entity Extraction using Rasa</h4>
-                    <pre><code>
-                  # Sample Rasa NLU pipeline configuration (config.yml)
-                  pipeline:
-                    - name: WhitespaceTokenizer
-                    - name: RegexFeaturizer
-                    - name: CRFEntityExtractor
-                    - name: DIETClassifier
-                      epochs: 100
-                    - name: EntitySynonymMapper
-                  
-                  # Sample NLU training data (nlu.yml)
-                  nlu:
-                  - intent: change_benefit
-                    examples: |
-                      - Change the benefit amount to $500 starting from [March 1st](start_date)
-                      - Update the [GBA1234](gba_code) plan for user [John Doe](user_name)
-                  
-                  # Python Code to Run Entity Extraction
-                  from rasa.nlu.model import Interpreter
-                  
-                  # Load trained Rasa model
-                  interpreter = Interpreter.load("./models")
-                  
-                  # Parse new change text
-                  message = "Please update benefit coverage starting from April 5th for user Sarah Connor."
-                  result = interpreter.parse(message)
-                  
-                  # Output extracted entities
-                  print("Intent:", result['intent']['name'])
-                  print("Entities:", result['entities'])
-                    </code></pre>
-
-                    <h4>5. Evaluation Metrics</h4>
-                    <pre><code>
-                  from sklearn.metrics import accuracy_score, precision_recall_fscore_support
-                  
-                  # For ELECTRA intent prediction
-                  intent_preds = trainer.predict(val_dataset)
-                  intent_labels = intent_preds.label_ids
-                  intent_predictions = intent_preds.predictions.argmax(axis=1)
-                  
-                  acc = accuracy_score(intent_labels, intent_predictions)
-                  precision, recall, f1, _ = precision_recall_fscore_support(intent_labels, intent_predictions, average='weighted')
-                  
-                  print(f"Intent Prediction - Accuracy: {acc:.2f}, Precision: {precision:.2f}, Recall: {recall:.2f}, F1: {f1:.2f}")
-                  
-                  # For Benefit vs. GBA classification
-                  print("Benefit vs. GBA Classification Report:")
-                  print(classification_report(data.loc[val_texts.index, 'benefit_gba_label'], preds))
-                    </code></pre>
-                </div>
-
-                <div>
-                    <h3>Challenges & Solutions</h3>
-                    <ul>
-                        <li><strong>Ambiguous Change Texts:</strong><br>
-                            <em>Solution:</em> Fine-tuned ELECTRA with domain-specific data to better handle ambiguous
-                            intents.
-                        </li>
-                        <li><strong>Class Imbalance:</strong><br>
-                            <em>Solution:</em> Used class weights in the Benefit/GBA classifier and applied data
-                            augmentation for underrepresented classes.
-                        </li>
-                        <li><strong>Complex Entity Structures:</strong><br>
-                            <em>Solution:</em> Leveraged Rasa's CRFEntityExtractor and DIETClassifier to accurately
-                            extract overlapping entities and handle complex entity relationships.
-                        </li>
-                        <li><strong>Pipeline Integration:</strong><br>
-                            <em>Solution:</em> Built a modular pipeline combining intent prediction, classification, and
-                            entity extraction for seamless processing.
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3>Impact of the Project</h3>
-                    <ul>
-                        <li><strong>Accuracy Improvements:</strong> Intent prediction achieved <strong>~90%</strong>
-                            accuracy, Benefit/GBA classification had an F1-score of <strong>~88%</strong>, and entity
-                            extraction reached <strong>~85%</strong> accuracy.</li>
-                        <li><strong>Efficiency Gains:</strong> The pipeline reduced processing time by
-                            <strong>40%</strong>, leading to faster decision-making.
-                        </li>
-                        <li><strong>Enhanced Data Insights:</strong> Entity extraction provided granular data points for
-                            downstream processes, improving overall data usability.</li>
-                        <li><strong>Scalability:</strong> Designed the solution to be scalable, allowing integration
-                            into existing FOBS workflows.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
+        
     </div>
 
 </body>

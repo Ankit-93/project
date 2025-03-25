@@ -221,31 +221,8 @@
                 </li>
             </ul>
         
-            <h3>3. Benefit vs. GBA Classification using BERT</h3>
-            <ul>
-                <li><strong>Model Choice:</strong> Fine-tuned <em>BERT (Bidirectional Encoder Representations from Transformers)</em> for text classification.</li>
-                <li><strong>Working Mechanism:</strong>
-                    <ul>
-                        <li><strong>Tokenization:</strong> Used BERT’s WordPiece tokenizer to split input text into subword tokens.</li>
-                        <li><strong>Embedding & Contextual Representation:</strong> The pre-trained BERT model converts tokens into dense vector embeddings while preserving bidirectional context.</li>
-                        <li><strong>Classification Layer:</strong> 
-                            <ul>
-                                <li>The output from BERT’s [CLS] token representation is passed through a fully connected layer.</li>
-                                <li>A softmax activation function is used to predict whether the input belongs to the "Benefit" or "GBA" category.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Optimization:</strong> Fine-tuned using the AdamW optimizer and cross-entropy loss.</li>
-                    </ul>
-                </li>
-                <li><strong>Challenges & Solutions:</strong>
-                    <ul>
-                        <li><strong>Overlapping Features Between Benefit & GBA:</strong> Used TF-IDF analysis to refine class boundaries.</li>
-                        <li><strong>Limited Training Data:</strong> Applied data augmentation techniques such as back-translation and synonym replacement.</li>
-                    </ul>
-                </li>
-            </ul>
         
-            <h3>4. Entity Extraction using RoBERTa</h3>
+            <h3>3. Entity Extraction using RoBERTa</h3>
             <ul>
                 <li><strong>Model Choice:</strong> Fine-tuned RoBERTa for Named Entity Recognition (NER).</li>
                 <li><strong>Entities Extracted:</strong>
@@ -258,12 +235,11 @@
                 </li>
             </ul>
         
-            <h3>5. Evaluation & Optimization</h3>
+            <h3>4. Evaluation & Optimization</h3>
             <ul>
                 <li><strong>Evaluation Metrics:</strong>
                     <ul>
                         <li>Intent Prediction: 90% F1-score</li>
-                        <li>Benefit vs. GBA Classification: 90% accuracy</li>
                         <li>Entity Extraction: 85% accuracy</li>
                     </ul>
                 </li>
@@ -287,10 +263,6 @@
                     <td>Fine-tuned ELECTRA with domain-specific data to improve intent understanding.</td>
                 </tr>
                 <tr>
-                    <td>Class Imbalance</td>
-                    <td>Applied class weighting, SMOTE, and data augmentation techniques.</td>
-                </tr>
-                <tr>
                     <td>Complex Entity Structures</td>
                     <td>Used RoBERTa + CRF for overlapping entities and ensured correct classification of related fields.</td>
                 </tr>
@@ -305,7 +277,6 @@
                 <li><strong>Accuracy Gains:</strong>
                     <ul>
                         <li>Intent Prediction: ~90% accuracy</li>
-                        <li>Benefit vs. GBA Classification: ~90% accuracy</li>
                         <li>Entity Extraction: ~85% accuracy</li>
                     </ul>
                 </li>
